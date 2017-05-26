@@ -15,3 +15,7 @@ class Noticia(models.Model):
         null=True,
     )
     created_utc = models.DateTimeField()
+    selftext = models.TextField(
+        blank=True,
+        null=True,
+    )
