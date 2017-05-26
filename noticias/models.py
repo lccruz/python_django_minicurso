@@ -6,11 +6,19 @@ from tags.models import Tag
 
 class Noticia(models.Model):
     tags = models.ManyToManyField(Tag)
+    id_reddit = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True,
+    )
     title = models.CharField(
         max_length=200,
     )
-    url = models.URLField()
+    url = models.URLField(
+        max_length=255
+    )
     thumbnail = models.URLField(
+        max_length=255,
         blank=True,
         null=True,
     )
