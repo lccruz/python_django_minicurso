@@ -5,6 +5,7 @@ import json
 from datetime import datetime
 from tags.models import Tag
 from noticias.models import Noticia
+from tags.models import Tag
 
 
 URL = "https://www.reddit.com/r"
@@ -81,10 +82,14 @@ def salva_noticias():
         thumbnail = verifica_thumbnail(noticia.get('thumbnail'))
         created_utc = converte_data(noticia.get('created_utc'))
         selftext = noticia.get('selftext')
+        subreddit = noticia.get('subreddit')
         # testa se noticia ja esta cadastrada
         noticia = Noticia.objects.filter(id_reddit=id_reddit)
         if noticia:
             continue
+
+        if subreddit:
+            tag = Tag.objects.get_or_create(title=subreddit)
 
         # salva noticia no bando de dados
         noticia = Noticia(
@@ -92,3 +97,9 @@ def salva_noticias():
             thumbnail=thumbnail, created_utc=created_utc, selftext=selftext
         )
         noticia.save()
+
+        # busca ou insere uma tag
+        if subreddit:
+            tag = Tag.objects.get_or_create(title=subreddit)
+            # faz a relacao noticia com a tag
+            noticia.tags.add(tag[0])

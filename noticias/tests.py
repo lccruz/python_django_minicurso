@@ -9,6 +9,7 @@ from utils.utils import get_reddit_noticias
 from utils.utils import get_local_noticias
 from utils.utils import salva_noticias
 from noticias.models import Noticia
+from tags.models import Tag
 
 
 class ModelsTestCase(TestCase):
@@ -63,3 +64,6 @@ class ModelsTestCase(TestCase):
         noticia = Noticia.objects.get(id_reddit="6deuhp")
         # testa se a url é igual a url da noticia id 6deuhp do utils/dados.json
         self.assertEqual(noticia.url, "https://i.redd.it/8lsahhntxrzy.jpg")
+        tag = Tag.objects.get(title="pics")
+        # testa se efetuou a ligacao noticia com a tag
+        self.assertEqual(noticia.tags.all()[0].title, "pics")
