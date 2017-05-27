@@ -1,0 +1,38 @@
+{% extends "base.html"%}
+{% load static %}
+{% block content %}
+  <div class="col-xs-12 col-sm-9">
+    {% for noticia in noticias %}
+      <div class="row">
+        <div class="col-md-3 col-lg-2">
+          {% if noticia.thumbnail %}
+            <img class="img-circle" src="{{ noticia.thumbnail }}" alt="" width="140" height="140">
+          {% else %}
+            <img class="img-circle" src="{%static 'img/reddit.png' %}" alt="Reddit" width="140" height="140">
+          {% endif %}
+        </div>
+        <div class="col-md-9 col-lg-10 col-xs-12">
+          <h3>
+            <a href="{{ noticia.url }}" role="button" target="_blank">{{ noticia.title }}</a>
+          </h3>
+          <p>
+            {{ noticia.created_utc }}
+          </p>
+          <p>{{ noticia.selftext }}</p>
+          <p>
+            {% for tag in noticia.tags.all %}
+              <a class="btn btn-default" href="{% url 'tag_noticias_list_view' tag.title %}" role="button">{{ tag.title }}</a>
+            {% endfor %}
+          </p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="col-xs-6 col-sm-3">
+    <div class="list-group">
+      {% for tag in tags %}
+        <a href="{% url 'tag_noticias_list_view' tag.title %}" class="list-group-item">{{ tag.title }}</a>
+      {% endfor %}
+    </div>
+  </div><!--/.sidebar-offcanvas-->
+{% endblock content %}

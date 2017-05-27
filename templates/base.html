@@ -21,11 +21,10 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Home</a>
+        <a class="navbar-brand" href="{% url 'home' %}">Home</a>
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li><a href="#">Tags</a></li>
           <li><a href="https://github.com/lccruz/python_django_minicurso">Sobre</a></li>
         </ul>
       </div><!-- /.nav-collapse -->
@@ -34,43 +33,9 @@
 
   <div class="container">
 
-    <div class="row row-offcanvas row-offcanvas-right">
-
-      <div class="col-xs-12 col-sm-9">
-        <p class="pull-right visible-xs">
-          <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Tags</button>
-        </p>
-        {% for noticia in noticias %}
-          <div class="row">
-            <div class="col-md-3 col-lg-2">
-              {% if noticia.thumbnail %}
-                <img class="img-circle" src="{{ noticia.thumbnail }}" alt="" width="140" height="140">
-              {% else %}
-                <img class="img-circle" src="{%static 'img/reddit.png' %}" alt="Reddit" width="140" height="140">
-              {% endif %}
-            </div>
-            <div class="col-md-9 col-lg-10 col-xs-12">
-              <h3>
-                <a href="{{ noticia.url }}" role="button" target="_blank">{{ noticia.title }}</a>
-              </h3>
-              <p>{{ noticia.selftext }}</p>
-              {% for tag in noticia.tags.all %}
-              <p>
-                <a class="btn btn-default" href="#" role="button" target="_blank">{{ tag.title }}</a>
-              </p>
-              {% endfor %}
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-
-      <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-        <div class="list-group">
-          {% for tag in tags %}
-            <a href="#" class="list-group-item">{{ tag.title }}</a>
-          {% endfor %}
-        </div>
-      </div><!--/.sidebar-offcanvas-->
+    <div class="row">
+      {% block content %}
+      {% endblock content %}
     </div><!--/row-->
 
     <hr>

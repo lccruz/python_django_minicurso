@@ -15,13 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from noticias.views import HomePageView
 from django.conf.urls.static import static
+from noticias.views import HomePageView
+from tags.views import TagNoticiasListView
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', HomePageView.as_view(), name='home'),
+    url(r'^tag/([\w-]+)/$', TagNoticiasListView.as_view(), name='tag_noticias_list_view'),
 ]
 
 from django.conf import settings
