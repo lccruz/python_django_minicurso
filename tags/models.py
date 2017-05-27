@@ -8,3 +8,9 @@ class Tag(models.Model):
         max_length=50,
         unique=True,
     )
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['title']
