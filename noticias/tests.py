@@ -66,4 +66,22 @@ class ModelsTestCase(TestCase):
         self.assertEqual(noticia.url, "https://i.redd.it/8lsahhntxrzy.jpg")
         tag = Tag.objects.get(title="pics")
         # testa se efetuou a ligacao noticia com a tag
-        self.assertEqual(noticia.tags.all()[0].title, "pics")
+        self.assertEqual(noticia.tags.all()[0].title, tag.title)
+
+    def testHome(self):
+        """
+            testa a se view home retorna 10 noticias e 25 tags
+        """
+        response = self.client.get('/')
+        self.failUnlessEqual(response.status_code, 200)
+        noticias = response.context['noticias'].object_list
+        self.assertEqual(len(noticias), 10)
+        tags = response.context['tags']
+        self.assertEqual(tags.count(), 25)
+        self.assertTrue(tags.filter(title='pics'))
+
+        # testa se trocou de pagina
+        response = self.client.get('/?page=2')
+        self.failUnlessEqual(response.status_code, 200)
+        noticias = response.context['noticias'].object_list
+        self.assertEqual(len(noticias), 10)

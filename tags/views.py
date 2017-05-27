@@ -1,6 +1,5 @@
 # -*- coding:utf-8 -*-
 
-from django.shortcuts import render
 from django.views.generic import ListView
 from django.shortcuts import get_object_or_404
 from tags.models import Tag
@@ -8,7 +7,7 @@ from tags.models import Tag
 
 class TagNoticiasListView(ListView):
     """
-        https://docs.djangoproject.com/en/1.11/topics/class-based-views/generic-display/#dynamic-filtering
+        ListView = https://docs.djangoproject.com/en/1.11/topics/class-based-views/generic-display/#dynamic-filtering
     """
 
     model = Tag
