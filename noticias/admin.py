@@ -1,3 +1,9 @@
 from django.contrib import admin
+from noticias.models import Noticia
 
-# Register your models here.
+
+class NoticiaAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+    search_fields = ('title', 'selftext', 'tags__title')
+
+admin.site.register(Noticia, NoticiaAdmin)
