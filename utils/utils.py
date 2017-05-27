@@ -5,7 +5,6 @@ import json
 from datetime import datetime
 from tags.models import Tag
 from noticias.models import Noticia
-from tags.models import Tag
 
 
 URL = "https://www.reddit.com/r"

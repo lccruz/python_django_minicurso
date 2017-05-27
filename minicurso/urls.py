@@ -17,12 +17,14 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls.static import static
 from noticias.views import HomePageView
+from noticias.views import pesquisa
 from tags.views import TagNoticiasListView
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', HomePageView.as_view(), name='home'),
+    url(r'^pesquisa/$', pesquisa, name='pesquisa'),
     url(r'^tag/([\w-]+)/$', TagNoticiasListView.as_view(), name='tag_noticias_list_view'),
 ]
 
