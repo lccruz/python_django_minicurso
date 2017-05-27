@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{%static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{%static 'css/offcanvas.css' %}" rel="stylesheet">
+    <title>Desenvolvimento ágil de aplicações Web com Python e Django</title>
+    <link rel="icon" href="https://getbootstrap.com/favicon.ico">
+</head>
+<body>
+  <nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Tags</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Home</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="#">Tags</a></li>
+          <li><a href="https://github.com/lccruz/python_django_minicurso">Sobre</a></li>
+        </ul>
+      </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+  </nav><!-- /.navbar -->
+
+  <div class="container">
+
+    <div class="row row-offcanvas row-offcanvas-right">
+
+      <div class="col-xs-12 col-sm-9">
+        <p class="pull-right visible-xs">
+          <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Tags</button>
+        </p>
+        {% for noticia in noticias %}
+          <div class="row">
+            <div class="col-xs-2">
+              {% if noticia.thumbnail %}
+                <img class="img-circle" src="{{ noticia.thumbnail }}" alt="" width="140" height="140">
+              {% else %}
+                <img class="img-circle" src="{%static 'img/reddit.png' %}" alt="Reddit" width="140" height="140">
+              {% endif %}
+            </div>
+            <div class="col-xs-10">
+              <h3>{{ noticia.title }}</h3>
+              <p>{{ noticia.selftext }}</p>
+              <p><a class="btn btn-default" href="{{ noticia.url }}" role="button" target="_blank">Ver</a></p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+        <div class="list-group">
+          <a href="#" class="list-group-item">Python</a>
+          <a href="#" class="list-group-item">Django</a>
+          <a href="#" class="list-group-item">Harley Davidson</a>
+        </div>
+      </div><!--/.sidebar-offcanvas-->
+    </div><!--/row-->
+
+    <hr>
+
+    <footer>
+      <p>© 2017</p>
+    </footer>
+
+  </div><!--/.container-->
+    <script src="{%static 'js/jquery.min.js' %}"></script>
+    <script src="{%static 'js/bootstrap.min.js' %}"></script>
+    <script src="{%static 'js/offcanvas.js' %}"></script>
+</body>
+</html>
