@@ -90,7 +90,7 @@ class ModelsTestCase(TestCase):
         """
             testa view pesquisa
         """
-        response = self.client.post("/pesquisa/", {'title':'day'})
+        response = self.client.post("/pesquisa/", {'title': 'day'})
         self.assertEqual(response.context['termo_pesquisado'], 'day')
         noticias = response.context['noticias']
         self.assertEqual(noticias.count(), 2)

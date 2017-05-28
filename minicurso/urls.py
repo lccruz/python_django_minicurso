@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls.static import static
+from django.conf import settings
 from noticias.views import HomePageView
 from noticias.views import pesquisa
 from tags.views import TagNoticiasListView
@@ -28,6 +29,5 @@ urlpatterns = [
     url(r'^tag/([\w-]+)/$', TagNoticiasListView.as_view(), name='tag_noticias_list_view'),
 ]
 
-from django.conf import settings
 if settings.DEBUG:
     urlpatterns += static('static', document_root=settings.STATIC_ROOT)
