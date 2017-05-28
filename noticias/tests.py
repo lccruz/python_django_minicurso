@@ -85,3 +85,14 @@ class ModelsTestCase(TestCase):
         self.failUnlessEqual(response.status_code, 200)
         noticias = response.context['noticias'].object_list
         self.assertEqual(len(noticias), 10)
+
+    def testPesquisa(self):
+        """
+            testa view pesquisa
+        """
+        response = self.client.post("/pesquisa/", {'title':'day'})
+        self.assertEqual(response.context['termo_pesquisado'], 'day')
+        noticias = response.context['noticias']
+        self.assertEqual(noticias.count(), 2)
+        for noticia in noticias:
+            self.assertTrue('day' in noticia.title)
