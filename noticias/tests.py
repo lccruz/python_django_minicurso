@@ -12,9 +12,12 @@ from noticias.models import Noticia
 from tags.models import Tag
 
 
+NOTICIAS = get_reddit_noticias()
+
+
 class ModelsTestCase(TestCase):
+
     def setUp(self):
-        get_reddit_noticias()
         salva_noticias()
 
     def testConverteData(self):
@@ -34,15 +37,13 @@ class ModelsTestCase(TestCase):
         self.assertEqual(verifica_thumbnail(thumbnail), thumbnail)
         self.assertFalse(verifica_thumbnail("BaitaInf"))
 
-    def _testRedditNoticias(self):
+    def testRedditNoticias(self):
         """
             testa conexão com REDDIT
             servidor do REDDIT responde com 429 (Too Many Requests)
             se executado muitas vezes o get_reddit_noticias
         """
-        time.sleep(5)
-        noticias = get_reddit_noticias()
-        self.assertTrue(noticias)
+        self.assertTrue(NOTICIAS)
         noticias = get_reddit_noticias()
         self.assertFalse(noticias)
 
